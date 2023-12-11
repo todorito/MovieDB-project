@@ -15,7 +15,7 @@ export const fetchTrendingMovies = async function () {
 };
 
 export const searchMovies = async function (movieName) {
-  await fetch(
+  return await fetch(
     "https://api.themoviedb.org/3/search/movie?query=" +
       movieName +
       "&include_adult=false&language=en-US&page=1",

@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = function () {
-  const [input, setInput] = useState("");
+const SearchBar = function ({ text }) {
+  const [input, setInput] = useState(text || "");
+  const navigate = useNavigate();
 
-  const searchMovies = function (e) {
+  const navigateToSearch = function (movie) {
+    navigate(`/search?q=${movie}`);
+  };
+
+  const getMovies = function (e) {
     e.preventDefault();
+    if (e.code === "Enter") {
+      navigateToSearch(input);
+    }
   };
 
   return (
@@ -13,7 +22,7 @@ const SearchBar = function () {
         placeholder="Search for a movie"
         className="rounded m-3 md:w-[15%] px-5 py-2 mt-10"
         onChange={(e) => setInput(e.target.value)}
-        onMouseEnter={searchMovies}
+        onKeyUp={getMovies}
         value={input}
       />
     </div>
