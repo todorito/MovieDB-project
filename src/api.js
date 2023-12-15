@@ -22,3 +22,10 @@ export const searchMovies = async function (movieName) {
     options
   );
 };
+
+export const searchMovieDetails = async function (movieID) {
+  return await fetch(
+    "https://api.themoviedb.org/3/movie/" + movieID + "?language=en-US",
+    options
+  );
+};
