@@ -14,7 +14,6 @@ const HomePage = function () {
       .then((response) => response.json())
       .then((data) => {
         setTrendingData(data);
-        console.log(data);
       })
       .catch((err) => console.error(err));
   };
@@ -44,16 +43,12 @@ const HomePage = function () {
   return (
     <>
       <div className="min-h-full">
-        <SearchBar />
-        <h1 className="text-white text-2xl w-auto bg-purple-500 p-2 md:w-1/5 flex justify-center mx-auto mt-5">
+        <h1 className="container mx-auto text-white text-2xl w-auto px-[2%] flex justify-start mt-5">
           Trending Now
         </h1>
-        <div className="flex flex-wrap flex-row justify-center">
+        <div className="container mx-auto flex flex-wrap flex-row justify-start">
           {allResults}
         </div>
-        <Button danger rounded outline>
-          Hey man
-        </Button>
       </div>
       {showModal && <Modal handleModal={handleModal} />}
     </>

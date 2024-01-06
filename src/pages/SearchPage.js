@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import SearchBar from "../components/SearchBar";
 import MovieInfo from "../components/MovieInfo";
 import { searchMovies } from "../api";
 
@@ -13,7 +12,6 @@ const SearchPage = function () {
     searchMovies(movie)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMovieData(data);
       })
       .catch((err) => console.error(err));
@@ -31,11 +29,10 @@ const SearchPage = function () {
   return (
     <>
       <div className="min-h-full">
-        <SearchBar text={searchTerm} />
-        <h1 className="text-white text-2xl w-auto bg-purple-500 p-2 md:w-1/5 flex justify-center mx-auto mt-5">
+        <h1 className="container mx-auto text-white text-2xl w-auto px-[2%] flex justify-start mt-5">
           Your searches: {searchTerm}
         </h1>
-        <div className="flex flex-wrap flex-row justify-center">
+        <div className="container mx-auto flex flex-wrap flex-row justify-start">
           {allSearches}
         </div>
       </div>

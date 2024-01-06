@@ -1,19 +1,23 @@
 import React from "react";
+import MovieInfo from "../components/MovieInfo";
+import { useFavourites } from "../providers/favouriteProvider";
 
 const FavouritesPage = function () {
-  // const allSearches =
-  // favMovieData.results &&
-  // favMovieData.results.map((item, index) => {
-  //   return <MovieInfo key={item.id} item={item} index={index} />;
-  // });
+  const { favData } = useFavourites();
+
+  const allFavourites =
+    favData &&
+    favData.map((item, index) => {
+      return <MovieInfo key={item.id} item={item} index={index} />;
+    });
 
   return (
     <div className="min-h-full">
-      <h1 className="text-white text-2xl w-auto bg-purple-500 p-2 md:w-1/5 flex justify-center mx-auto mt-5">
+      <h1 className="container mx-auto text-white text-2xl w-auto px-[2%] flex justify-start mt-5">
         Your favourite Movies
       </h1>
-      <div className="flex flex-wrap flex-row justify-center">
-        {/* <p>{favMovieData}</p> */}
+      <div className="container mx-auto flex flex-wrap flex-row justify-start">
+        {allFavourites}
       </div>
     </div>
   );

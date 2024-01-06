@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .background-neutral {
+    @apply bg-n-800;
+  }
+
+  .background-button-neutral {
+    @apply bg-n-700;
+  }
+
+  .text-neutral {
+    @apply text-n-800;
+  }
+
+  .background-neutral-strong {
+    @apply bg-n-900;
+  }
+
+  .button-info {
+    @apply bg-b-500;
+  }
+
+  .text-inverted-weak {
+    @apply text-i-300;
+  }
+
+  .text-success {
+    @apply text-g-500;
+  }
+}

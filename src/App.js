@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HomePage from "./pages/HomePage";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FavouritesPage from "./pages/FavouritesPage";
 import SearchPage from "./pages/SearchPage";
 import ErrorPage from "./pages/ErrorPage";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
-import { createContext } from "react";
+import { FavouriteProvider } from "./providers/favouriteProvider";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 function App() {
-  const [favMovieData, setFavMovieData] = useState({});
-  const FavMovieDataContext = createContext({});
-
   return (
-    <FavMovieDataContext.Provider value={{ favMovieData, setFavMovieData }}>
-      <Router>
-        <div className="bg-zinc-700 min-h-screen">
-          <nav className="bg-gray-500">
-            <Link to="/">HomePage</Link>
-            <Link to="/favourites">Favourites</Link>
-          </nav>
+    <Router>
+      <FavouriteProvider>
+        <div className="background-neutral-strong min-h-screen">
+        <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/favourites" element={<FavouritesPage />} />
@@ -27,8 +23,9 @@ function App() {
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>
-      </Router>
-    </FavMovieDataContext.Provider>
+        <Footer />
+      </FavouriteProvider>
+    </Router>
   );
 }
 

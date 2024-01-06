@@ -7,12 +7,10 @@ const MovieDetailsPage = function () {
 
   const { id } = useParams();
 
-  console.log(id);
   const fetchMovieDetails = function (id) {
     searchMovieDetails(id)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMovieDetailsData(data);
       })
       .catch((err) => console.error(err));
@@ -51,7 +49,7 @@ const MovieDetailsPage = function () {
       return movieDetailsData.release_date.substr(0, 4);
     }
   };
-
+  let vote = String(movieDetailsData.vote_average).substring(0, 3);
   return (
     <div className="bg-[#120F1F] md:min-h-[100vh]">
       {movieDetailsData.backdrop_path && (
@@ -106,8 +104,8 @@ const MovieDetailsPage = function () {
         <div className="flex flex-col p-2 mx-3 my-3 md:my-3 md:m-auto md:w-[35%] bg-[#242038] text-white rounded-lg">
           <p>Overview: {movieDetailsData.overview}</p>
           <div className="m-auto pt-2">
-            {movieDetailsData.vote_average} rating out of{" "}
-            {movieDetailsData.vote_count} people
+            <span className="text-success">{vote}&nbsp;</span>
+            rating out of {movieDetailsData.vote_count} people
           </div>
         </div>
       </div>
