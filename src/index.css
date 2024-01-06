@@ -30,4 +30,8 @@
   .text-success {
     @apply text-g-500;
   }
+
+  .text-info {
+    @apply text-b-500;
+  }
 }
