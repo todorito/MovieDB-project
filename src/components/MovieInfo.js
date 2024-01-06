@@ -25,7 +25,7 @@ const MovieInfo = function ({ index, item }) {
   const isFavourite = favData.some((movie) => movie.id === item.id);
 
   console.log(isFavourite, "isFavourite");
-  let vote = String(item.vote_average).substring(0, 3);
+  let vote = String(item.vote_average).substring(0, 3) * 10 + "%";
   return (
     <div
       onClick={getMovieDetails}

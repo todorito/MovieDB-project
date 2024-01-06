@@ -49,7 +49,7 @@ const MovieDetailsPage = function () {
       return movieDetailsData.release_date.substr(0, 4);
     }
   };
-  let vote = String(movieDetailsData.vote_average).substring(0, 3);
+  let vote = String(movieDetailsData.vote_average).substring(0, 3) * 10 + "%";
   return (
     <div className="bg-[#120F1F] md:min-h-[100vh]">
       {movieDetailsData.backdrop_path && (
