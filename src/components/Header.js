@@ -16,7 +16,7 @@ const Header = function () {
             }
             to="/"
           >
-            HomePage
+            Home
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -28,7 +28,7 @@ const Header = function () {
           </NavLink>
         </div>
         <div className="md:w-auto w-full mt-5 md:mt-0">
-          <SearchBar />
+          <SearchBar /> 
         </div>
         <div className="md:ml-[10rem] md:grow"></div>
       </nav>
