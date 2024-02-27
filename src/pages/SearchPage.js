@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import MovieInfo from "../components/MovieInfo";
-import { searchMovies } from "../api";
+import { fetchMovies } from "../api";
 
 const SearchPage = function () {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -9,7 +9,7 @@ const SearchPage = function () {
   const searchTerm = searchParams.get("q");
 
   const fetchSearchResults = function (movie) {
-    searchMovies(movie)
+    fetchMovies(movie)
       .then((response) => response.json())
       .then((data) => {
         setMovieData(data);

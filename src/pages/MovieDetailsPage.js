@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { searchMovieDetails } from "../api";
+import { fetchMovieDetails, fetchMovieCast } from "../api";
 import { useParams } from "react-router-dom";
 
 const MovieDetailsPage = function () {
   const [movieDetailsData, setMovieDetailsData] = useState({});
+  const [movieCreditsData, setMovieCreditsData] = useState({});
 
   const { id } = useParams();
 
-  const fetchMovieDetails = function (id) {
-    searchMovieDetails(id)
+  const movieDetails = function (id) {
+    fetchMovieDetails(id)
       .then((response) => response.json())
       .then((data) => {
         setMovieDetailsData(data);
@@ -16,8 +17,23 @@ const MovieDetailsPage = function () {
       .catch((err) => console.error(err));
   };
 
+  const movieCredits = function (id) {
+    fetchMovieCast(id)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(
+          data.cast.character,
+          data.cast.name,
+          data.cast.profile_path
+        );
+        setMovieCreditsData(data);
+      })
+      .catch((err) => console.error(err));
+  };
+
   useEffect(() => {
-    fetchMovieDetails(id);
+    movieDetails(id);
+    movieCredits(id);
   }, [id]);
 
   const genres =

@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
-import SearchBar from "../components/SearchBar";
-import Button from "../components/Button";
 import Modal from "../components/Modal";
 import { fetchTrendingMovies } from "../api";
 import MovieInfo from "../components/MovieInfo";
 
 const HomePage = function () {
   const [showModal, setShowModal] = useState(true);
-  const [trendingData, setTrendingData] = useState({});
+  const [trendingMovieData, setTrendingMovieData] = useState({});
 
   const response = function () {
     fetchTrendingMovies()
       .then((response) => response.json())
       .then((data) => {
-        setTrendingData(data);
+        setTrendingMovieData(data);
       })
       .catch((err) => console.error(err));
   };
@@ -31,8 +29,8 @@ const HomePage = function () {
   }, []);
 
   const allResults =
-    trendingData.results &&
-    trendingData.results.map((item, index) => {
+    trendingMovieData.results &&
+    trendingMovieData.results.map((item, index) => {
       return <MovieInfo key={item.id} item={item} index={index} />;
     });
 
@@ -44,7 +42,7 @@ const HomePage = function () {
     <>
       <div className="min-h-full">
         <h1 className="container mx-auto text-white text-2xl w-auto px-[2%] flex justify-start mt-5">
-          Trending Now
+          Trending Movies
         </h1>
         <div className="container mx-auto flex flex-wrap flex-row justify-start">
           {allResults}

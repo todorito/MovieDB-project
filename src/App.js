@@ -1,7 +1,7 @@
 import React from "react";
 import HomePage from "./pages/HomePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import FavouritesPage from "./pages/FavouritesPage";
+import FavouritesPage from "./pages/FavouriteMoviesPage";
 import SearchPage from "./pages/SearchPage";
 import ErrorPage from "./pages/ErrorPage";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
