@@ -2,7 +2,7 @@ import React from "react";
 import MovieInfo from "../components/MovieInfo";
 import { useFavourites } from "../providers/favouriteProvider";
 
-const FavouritesPage = function () {
+const FavouriteMoviesPage = function () {
   const { favData } = useFavourites();
 
   const allFavourites =
@@ -23,4 +23,4 @@ const FavouritesPage = function () {
   );
 };
 
-export default FavouritesPage;
+export default FavouriteMoviesPage;
