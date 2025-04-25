@@ -9,7 +9,7 @@ const SearchBar = function ({ text }) {
   const navigateToSearch = function (movie) {
     navigate(`/search?q=${movie}`);
   };
-  console.log(text);
+
   const getMovies = function (e) {
     e.preventDefault();
     navigateToSearch(input);

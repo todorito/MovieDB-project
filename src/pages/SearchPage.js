@@ -32,7 +32,7 @@ const SearchPage = function () {
         <h1 className="container mx-auto text-white text-2xl w-auto px-[2%] flex justify-start mt-5">
           Your searches: {searchTerm}
         </h1>
-        <div className="container mx-auto flex flex-wrap flex-row justify-start">
+        <div className="container mx-auto grid md:grid-cols-4 lg:grid-cols-5 gap-4 justify-start">
           {allSearches}
         </div>
       </div>

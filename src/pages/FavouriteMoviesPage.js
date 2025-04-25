@@ -16,7 +16,7 @@ const FavouriteMoviesPage = function () {
       <h1 className="container mx-auto text-white text-2xl w-auto px-[2%] flex justify-start mt-5">
         Your favourite Movies
       </h1>
-      <div className="container mx-auto flex flex-wrap flex-row justify-start">
+      <div className="container mx-auto grid lg:grid-cols-5 md:grid-cols-4 justify-start gap-4">
         {allFavourites}
       </div>
     </div>
