@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { fetchMovieDetails, fetchMovieCast } from "../api";
 import { useParams } from "react-router-dom";
+import CreditsInfo from "../components/CreditsInfo";
+import CrewInfo from "../components/CrewInfo";
 
 const MovieDetailsPage = function () {
   const [movieDetailsData, setMovieDetailsData] = useState({});
   const [movieCreditsData, setMovieCreditsData] = useState({});
+  const [showMoreCast, setShowMoreCast] = useState(false);
 
   const { id } = useParams();
 
@@ -21,11 +24,6 @@ const MovieDetailsPage = function () {
     fetchMovieCast(id)
       .then((response) => response.json())
       .then((data) => {
-        console.log(
-          data.cast.character,
-          data.cast.name,
-          data.cast.profile_path
-        );
         setMovieCreditsData(data);
       })
       .catch((err) => console.error(err));
@@ -45,8 +43,28 @@ const MovieDetailsPage = function () {
         return <React.Fragment key={i}>{item.name}, </React.Fragment>;
       }
     });
-  // movieDetailsD  ata.genres.map((item) => item.name).join(", ");
-  // && window.innerWidth > 640
+
+  const someCast =
+    movieCreditsData.cast &&
+    movieCreditsData.cast.map((item, index) => {
+      if (index < 7) {
+        return <CreditsInfo key={item.credit_id} data={item} />;
+      }
+    });
+
+  const cast =
+    movieCreditsData.cast &&
+    movieCreditsData.cast.map((item, index) => {
+      // index <= 10;
+      return <CreditsInfo key={item.credit_id} data={item} />;
+    });
+
+  const crew =
+    movieCreditsData.crew &&
+    movieCreditsData.crew.map((item, index) => {
+      return <CrewInfo key={item.credit_id} data={item} />;
+    });
+
   const spokenLang =
     movieDetailsData.spoken_languages &&
     movieDetailsData.spoken_languages.map((item, i) => {
@@ -65,7 +83,13 @@ const MovieDetailsPage = function () {
       return movieDetailsData.release_date.substr(0, 4);
     }
   };
+
   let vote = String(movieDetailsData.vote_average).substring(0, 3) * 10 + "%";
+
+  const toggleCast = () => {
+    setShowMoreCast(!showMoreCast);
+  };
+
   return (
     <div className="bg-[#120F1F] md:min-h-[100vh]">
       {movieDetailsData.backdrop_path && (
@@ -104,8 +128,8 @@ const MovieDetailsPage = function () {
           </div>
         </div>
       )}
-      <div className="flex flex-col md:flex-row">
-        <div className="flex flex-col justify-center font-semibold text-white ml-2">
+      <div className="flex flex-col md:flex-row md:justify-center container m-auto">
+        <div className="flex flex-col font-semibold text-white ml-2 bg-n-800 p-2 rounded-lg mx-3 my-3">
           <p className="p-1">Status: {movieDetailsData.status}</p>
           <p className="p-1">Bugdet: {movieDetailsData.budget}</p>
           <p className="p-1">Genres: {genres}</p>
@@ -117,13 +141,46 @@ const MovieDetailsPage = function () {
             Original Language: {movieDetailsData.original_language}
           </p>
         </div>
-        <div className="flex flex-col p-2 mx-3 my-3 md:my-3 md:m-auto md:w-[35%] bg-[#242038] text-white rounded-lg">
+        <div className="flex flex-col p-2 mx-3 my-3 md:my-3 md:w-[50%] bg-n-800 text-white rounded-lg">
           <p>Overview: {movieDetailsData.overview}</p>
           <div className="m-auto pt-2">
             <span className="text-success">{vote}&nbsp;</span>
             rating out of {movieDetailsData.vote_count} people
           </div>
         </div>
+      </div>
+      <div className="container m-auto pb-2" onClick={toggleCast}>
+        {showMoreCast ? (
+          <>
+            <div className="text-white flex flex-row items-baseline">
+              {cast && <h2>Cast&nbsp;({cast.length})</h2>}
+              <button
+                className="m-5 text-white p-2 m-1 rounded background-button-neutral"
+                onClick={toggleCast}
+              >
+                Show Less
+              </button>
+            </div>
+            <div className="grid lg:grid-cols-8 md:grid-cols-5 container m-auto">
+              {cast}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="text-white flex flex-row items-baseline">
+              {cast && <h2>Cast&nbsp;({cast.length})</h2>}
+              <button
+                className="m-5 text-white p-2 m-1 rounded background-button-neutral"
+                onClick={toggleCast}
+              >
+                Show More
+              </button>
+            </div>
+            <div className="grid lg:grid-cols-8 md:grid-cols-5 container m-auto">
+              {someCast}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
