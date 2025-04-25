@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { BiSolidStar } from "react-icons/bi";
 import { BiStar } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useFavourites } from "../providers/favouriteProvider";
 
-const MovieInfo = function ({ index, item }) {
+const MovieInfo = function ({ index, item, extraClass, extraEl }) {
   const { addToFavourites, favData, removeFromFavourites } = useFavourites();
   const navigateToDetails = useNavigate();
 
@@ -24,15 +24,15 @@ const MovieInfo = function ({ index, item }) {
 
   const isFavourite = favData.some((movie) => movie.id === item.id);
 
-  console.log(isFavourite, "isFavourite");
   let vote = String(item.vote_average).substring(0, 3) * 10 + "%";
+  const defClasses =
+    "relative background-neutral text-white rounded m-[2%] p-0 pb-2 min-w-[96%] overflow-hidden cursor-pointer";
+  let allClassNames = extraClass ? defClasses + extraClass : defClasses;
+
   return (
-    <div
-      onClick={getMovieDetails}
-      className="relative background-neutral text-white rounded m-[2%] p-0 pb-2 min-w-[96%] md:min-w-[16%] overflow-hidden md:w-[16%]"
-    >
+    <div onClick={getMovieDetails} className={allClassNames}>
       <div
-        className="absolute p-2 background-neutral rounded-bl-2xl rounded-tr right-0 top-0"
+        className="absolute p-2 background-neutral rounded-bl-2xl rounded-tr right-0 top-0 cursor-pointer"
         onClick={isFavourite ? (e) => removeFavourites(e) : addFavourites}
       >
         {isFavourite ? (
@@ -61,6 +61,7 @@ const MovieInfo = function ({ index, item }) {
         <span className="text-success">{vote}&nbsp;</span> rating out of{" "}
         {item.vote_count} people
       </p>
+      {extraEl && extraEl}
     </div>
   );
 };
