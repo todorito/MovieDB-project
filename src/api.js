@@ -63,6 +63,13 @@ export const fetchPersonsDetails = async function (personID) {
   );
 };
 
+export const fetchPersonsMovieCredits = async function (personID) {
+  return await fetch(
+    baseURL + "/person/" + personID + "/movie_credits",
+    options
+  );
+};
+
 export const fetchMovieCast = async function (movieID) {
   return await fetch(
     baseURL + "/movie/" + movieID + "/credits?language=en-US",
