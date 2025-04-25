@@ -8,7 +8,7 @@
   }
 
   .background-button-neutral {
-    @apply bg-n-700;
+    @apply bg-n-700 active:bg-n-500 hover:bg-n-600;
   }
 
   .text-neutral {
@@ -20,7 +20,7 @@
   }
 
   .button-info {
-    @apply bg-b-500;
+    @apply bg-b-500 active:bg-b-300 hover:bg-b-400;
   }
 
   .text-inverted-weak {
@@ -33,5 +33,13 @@
 
   .text-info {
     @apply text-b-500;
+  }
+
+  .title-medium-normal {
+    @apply text-[1rem] leading-[140%] font-normal;
+  }
+
+  .header-medium-strong {
+    @apply text-[1.375rem] leading-[140%] font-medium;
   }
 }
