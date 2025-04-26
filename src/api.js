@@ -7,8 +7,11 @@ const options = {
   },
 };
 const baseURL = "https://api.themoviedb.org/3";
-export const fetchTrendingMovies = async function () {
-  return await fetch(baseURL + "/trending/movie/week?language=en-US", options);
+export const fetchTrendingMovies = async function (pageNum) {
+  return await fetch(
+    baseURL + `/trending/movie/week?language=en-US&page=${pageNum}`,
+    options
+  );
 };
 
 export const fetchTrendingSeries = async function () {
